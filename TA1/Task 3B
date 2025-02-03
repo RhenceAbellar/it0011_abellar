@@ -1,0 +1,27 @@
+#A program that will display the following given output. (for b. use nested while statement)
+
+line = 1
+total_lines = 5
+
+while line <= total_lines:  
+    if line == 1:
+        value = 1
+    elif line == 2:
+        value = 3
+    elif line == 3:
+        value = 5
+    elif line == 4:
+        value = 6
+    elif line == 5:
+        value = 7
+    
+    column = 1
+    while column <= (2 * line - 1):  
+        print(value, end="")
+        column += 1
+
+    print()  
+    line += 1
+
+
+
