@@ -70,11 +70,12 @@ while True:
         found = None
         for record in student_records:
             if record[0] == student_id:
-                found = record
+                final_grade = (0.6 * float(record[3])) + (0.4 * float(record[4]))
+                found = f"ID: {record[0]} | Name: {record[1]} {record[2]} | Class Standing: {record[3]} | Major Exam: {record[4]} | Final Grade: {final_grade:.2f}"
                 break
-        print("\n=============================================")
+        print("\n========================================================================================")
         print(found if found else " No matching record found. ")
-        print("=============================================")
+        print("========================================================================================")
 
     elif choice == "6":
         student_id = input("Enter 6-digit Student ID: ")
