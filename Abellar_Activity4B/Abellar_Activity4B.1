@@ -1,0 +1,31 @@
+A = {"a", "b", "c", "d", "f", "g"}
+B = {"b", "c", "h", "l", "m", "o"}
+C = {"c", "d", "f", "h", "i", "j", "k"}
+
+#A
+print("\n==================================================================")
+print(" (a) All elements in A or B")
+print("==================================================================")
+print(" Count:", len(A | B))
+print(" Elements:", A | B)
+
+#B
+B_not_A_C = B - (A | C)
+print("\n==================================================================")
+print(" (b) Elements in B but not in A or C")
+print("==================================================================")
+print(" Count:", len(B_not_A_C))
+print(" Elements:", B_not_A_C)
+
+#C
+print("\n==================================================================")
+print(" (c) Set Operations Results")
+print("==================================================================")
+print(" c.i) Elements in C but not in A:\t     ", C - A)
+print(" c.ii) Elements common in A and C:\t     ", A & C)
+print(" c.iii) Elements shared between any two sets:", (A & B) | (B & C))
+print(" c.iv) Elements in both A and C but not in B:", A & C - B)
+print(" c.v) Elements common in A, B, and C:\t     ", A & B & C)
+print(" c.vi) Elements only in B, excluding A and C:", B - (A | C),"\n")
+
+
