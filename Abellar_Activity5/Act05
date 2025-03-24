@@ -1,0 +1,63 @@
+def print_divider():
+    print("=" * 35)
+
+def divide(first_num, second_num):
+    if second_num == 0:
+        print("Cannot perform division, the second number cannot be zero.")
+        return None
+    return first_num / second_num
+
+def exponentiate(first_num, second_num):
+    return first_num ** second_num
+
+def remainder(first_num, second_num):
+    if second_num == 0:
+        print("Cannot compute remainder, the second number cannot be zero.")
+        return None
+    return first_num % second_num
+
+def summation(start, end):
+    if start >= end:
+        print("Invalid range, the second number must be greater than the first.")
+        return None
+    return sum(range(start, end + 1))
+
+while True:
+    print("\n")
+    print_divider()
+    print(" Choose a Mathematical Operations")
+    print_divider()
+    print("[D] - Division")
+    print("[E] - Exponentiation")
+    print("[R] - Remainder")
+    print("[F] - Summation")
+    print("[Q] - Quit")
+
+    choice = input("\nPlease select an operation: ").upper()
+
+    if choice == "Q":
+        print("Exiting the program. Thank you and goodbye!")
+        break
+
+    if choice in ["D", "E", "R", "F"]:
+        try:
+            first_num = int(input("\nEnter the first number: "))
+            second_num = int(input("Enter the second number: "))
+
+            if choice == "D":
+                result = divide(first_num, second_num)
+            elif choice == "E":
+                result = exponentiate(first_num, second_num)
+            elif choice == "R":
+                result = remainder(first_num, second_num)
+            elif choice == "F":
+                result = summation(first_num, second_num)
+
+            if result is not None:
+                print("The result is:", result)
+
+        except ValueError:
+            print("Invalid input, please enter valid numeric values.")
+
+    else:
+        print("Error! Please enter a valid option: D, E, R, F, or Q.")
