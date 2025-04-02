@@ -1,0 +1,118 @@
+class Item:
+    def __init__(self, item_id: int, name: str, description: str, price: float):
+        if not name.strip():
+            raise ValueError("Oops! Item name can't be empty.")
+        if price < 0:
+            raise ValueError("Whoa! Price can't be negative.")
+        
+        self.item_id = item_id
+        self.name = name
+        self.description = description
+        self.price = price
+    
+    def __str__(self):
+        return f"ID: {self.item_id} | Name: {self.name} | Price: ${self.price:.2f}\nDescription: {self.description}"
+
+
+class ItemManager:
+    def __init__(self):
+        self.items = []
+        self.next_id = 1
+    
+    def create_item(self, name: str, description: str, price: float):
+        try:
+            new_item = Item(self.next_id, name, description, price)
+            self.items.append(new_item)
+            self.next_id += 1
+            print("\nItem added successfully!")
+        except ValueError as e:
+            print(f"Error: {e}")
+    
+    def read_items(self):
+        if not self.items:
+            print("\nNo items available.")
+        else:
+            print("\nHere are your items:")
+            for item in self.items:
+                print(item)
+    
+    def update_item(self, item_id: int, name: str, description: str, price: float):
+        for item in self.items:
+            if item.item_id == item_id:
+                try:
+                    item.name = name if name.strip() else item.name
+                    item.description = description if description.strip() else item.description
+                    item.price = price if price >= 0 else item.price
+                    print("\nItem updated successfully!")
+                    return
+                except ValueError as e:
+                    print(f"Error: {e}")
+                    return
+        print("\nItem not found! Try again.")
+    
+    def delete_item(self, item_id: int):
+        for item in self.items:
+            if item.item_id == item_id:
+                self.items.remove(item)
+                print("\nItem deleted successfully!")
+                return
+        print("\nItem not found! Try again.")
+
+
+def main():
+    manager = ItemManager()
+    
+    while True:
+        print("\n")
+        print("=" * 70)
+        print("\t\t\tItem Management System")
+        print("=" * 70)
+        print("1. Add Item")
+        print("2. View Items")
+        print("3. Update Item")
+        print("4. Delete Item")
+        print("5. Exit")
+        
+        choice = input("Enter your choice: ")
+        print("-" * 70)
+        
+        if choice == "1":
+            name = input("Enter item name: ")
+            description = input("Enter item description: ")
+            try:
+                price = float(input("Enter item price: "))
+                manager.create_item(name, description, price)
+            except ValueError:
+                print("\nInvalid price. Please enter a valid number.")
+                
+        elif choice == "2":
+            manager.read_items()
+            
+        elif choice == "3":
+            try:
+                item_id = int(input("Enter item ID to update: "))
+                name = input("Enter new name (leave blank to keep current): ")
+                description = input("Enter new description (leave blank to keep current): ")
+                price_input = input("Enter new price (leave blank to keep current): ")
+                price = float(price_input) if price_input.strip() else -1
+                manager.update_item(item_id, name, description, price)
+            except ValueError:
+                print("\nInvalid input. Please enter a valid number.")
+                
+        elif choice == "4":
+            try:
+                item_id = int(input("Enter item ID to delete: "))
+                manager.delete_item(item_id)
+            except ValueError:
+                print("\nInvalid input. Please enter a valid number.")
+                
+        elif choice == "5":
+            print("Exiting the program. See you next time!")
+            break
+        else:
+            print("\nInvalid choice! Please enter a number between 1 and 5.")
+
+
+if __name__ == "__main__":
+    main()
+
